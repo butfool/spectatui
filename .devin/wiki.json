@@ -1,0 +1,291 @@
+{
+  "repo_notes": [
+    {
+      "content": "A TUI (Terminal UI) dashboard for Github Spec-Kit"
+    }
+  ],
+  "pages": [
+    {
+      "title": "Overview",
+      "purpose": "High-level introduction to spectatui: what it is, why it exists, key concepts, and how the major subsystems relate. Links to child pages for deeper coverage.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Getting Started",
+      "purpose": "Installation (install.sh, cargo), CLI arguments (--project, --theme, --accent), first-run experience, and configuration file locations (.spectatui.toml). Covers the install script, binary distribution, and initial setup.",
+      "parent": "Overview",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Key Concepts and Terminology",
+      "purpose": "Explains the Spec-Driven Development (SDD) model, the role of the specify CLI, the Spec-Kit project layout (.specify/, specs/), and the relationship between spectatui and the underlying specify CLI. Covers Feature, Constitution, Extension, Preset, Integration, Workflow, and Catalog concepts.",
+      "parent": "Overview",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Architecture",
+      "purpose": "Overview of the two-crate Rust architecture (spectatui-core library + spectatui binary), the async event loop, and how data flows from filesystem/CLI through to the TUI. Links to child pages for each major subsystem.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Application State and Event Loop",
+      "purpose": "Deep dive into app.rs (App struct), main.rs (run_loop), and event.rs (AppEvent, EventStream). Covers the async tokio runtime, concurrent event sources (file watcher, tmux poller, catalog indexer), and the one-CLI-action-at-a-time rule.",
+      "parent": "Architecture",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Core Library: spectatui-core",
+      "purpose": "Covers the spectatui-core crate: Project and Feature discovery, FeatureArtifacts, WorkflowStage inference, filesystem watching (notify/debouncer), and the layout engine (PaneKind, PaneConfig, CustomLayout).",
+      "parent": "Architecture",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "specify CLI Integration",
+      "purpose": "Explains SpecifyCliClient, CliAction enum, the async job execution pipeline (spawn_job, CliEvent streaming, poll_cli_job), and the registry parsing layer (Dialect A vs Dialect B, load_extensions/presets/integrations, list_catalog_sources).",
+      "parent": "Architecture",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "tmux Integration",
+      "purpose": "Covers TmuxClient (list_sessions, find_session, capture_pane, send_keys), SessionStatus enum, the 750ms polling loop, TUI suspension/handoff for session attach, and the agent output tail-follow mechanism.",
+      "parent": "Architecture",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "TUI Rendering Layer",
+      "purpose": "Overview of the ratatui-based rendering system: the draw() entry point, Screen enum, DashboardLayout presets, the popup/palette overlay system, and the register_click mouse support pattern. Links to child pages for each major UI area.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Dashboard Layouts and Pane System",
+      "purpose": "Covers the four DashboardLayout presets (Overview, Coding, Audit, Custom), the PaneKind enum, custom_pane_rects geometry, and the Layout Editor (toggle visibility, reorder, resize panes). Explains how the custom layout is serialized to config.",
+      "parent": "TUI Rendering Layer",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Feature List, Workflow Stepper, and Agent Output Panes",
+      "purpose": "Details the three core dashboard panes: feature_list (scrolling, stage badges, running indicators, click registration), workflow (stepper visualization, tasks progress bar), and agent_output (tmux snapshot rendering, status indicator, tail-follow).",
+      "parent": "TUI Rendering Layer",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Spec Browser and Constitution Viewer",
+      "purpose": "Covers spec_browser.rs: the feature sidebar, doc pane with SpecTab switching (Spec/Plan/Tasks/Research), the custom Markdown-to-TUI renderer (render_md_line, render_tasks_line, checkbox parsing), and the constitution.md viewer.",
+      "parent": "TUI Rendering Layer",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Popup System and Manager Overlays",
+      "purpose": "Explains popup.rs as the centralized modal dispatcher: PopupKind enum, dim_backdrop algorithm, fixed_centered_rect geometry, and each manager overlay (Integrations, Workflows, Catalogs, Extensions, Presets, Features, Help, CliConfirm, CliOutput).",
+      "parent": "TUI Rendering Layer",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Command Palette, Settings, and Status Bar",
+      "purpose": "Covers palette.rs (fuzzy command search, PaletteCommand, Ctrl+K / : trigger), settings.rs (SettingsRow types: text, chips, actions; config persistence), and statusbar.rs (stat tuples, keybinding hints, header).",
+      "parent": "TUI Rendering Layer",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Theming System",
+      "purpose": "Documents the Theme struct, ThemeMode (Dark/Light), Accent (Indigo/Teal/Amber), all pre-built Style fields, stage_badge color mapping, and how themes are applied consistently across all UI modules.",
+      "parent": "TUI Rendering Layer",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Configuration",
+      "purpose": "Overview of the AppConfig system, config file resolution order, and all configurable settings. Links to child pages for specific configuration areas.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "AppConfig Schema and Persistence",
+      "purpose": "Documents every AppConfig field (theme, accent, dashboard_layout, mouse_support, agent_tail_follow, confirm_before_force, tmux_prefix, config_location, custom_layout), TOML serialization, CONFIG_LOCATIONS presets, load_config/save_config logic, and per-project vs global config.",
+      "parent": "Configuration",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Catalog Manager",
+      "purpose": "Covers the Catalog Manager feature: CatalogTarget enum, CatalogSource data model, the add/remove/edit lifecycle (including the remove-then-add edit workaround), Discovery-only vs Install-allowed sources, sticky tabs UX, and the async CatalogSourcesLoaded event flow.",
+      "parent": "Configuration",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Development Environment and Tooling",
+      "purpose": "Overview of the monorepo toolchain (Nx + pnpm + Rust/Cargo), DevContainer setup, and CI/CD pipeline. Links to child pages for each area.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "DevContainer and Local Setup",
+      "purpose": "Documents the devcontainer.json configuration: base image, installed features (Git, Python/uv, Rust 1.96.0, GitHub CLI), volume mounts (node_modules, claude-config, caches), VS Code extensions, and the post-create.sh initialization script (permissions, pnpm install, Claude CLI, specify CLI, sox, JetBrains Mono).",
+      "parent": "Development Environment and Tooling",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Nx Monorepo and Build System",
+      "purpose": "Covers the Nx workspace configuration (nx.json, @monodon/rust plugin, pnpm-workspace.yaml), project.json files for each crate, build targets (build/test/lint/check/fmt), the patches/@monodon__rust patch, and how to run tasks with pnpm nx.",
+      "parent": "Development Environment and Tooling",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "CI/CD Pipeline and Release Process",
+      "purpose": "Documents the GitHub Actions workflows (ci.yml for tests, release.yml for versioning/build/publish), the check-release.sh script (nx release, first-release handling, GITHUB_OUTPUT), build-artifacts.sh (local vs CI mode, target triples, staging directory, .tar.gz/.zip packaging), cross-compilation with cross, cargo-wix for Windows MSI, and artifact attestation.",
+      "parent": "Development Environment and Tooling",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Spec-Kit Extensions and Claude Skills",
+      "purpose": "Overview of the installed Spec-Kit extensions (refine, agent-context) and the Claude AI skills used for development automation. Links to child pages for each area.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Installed Extensions: refine and agent-context",
+      "purpose": "Documents the two installed Spec-Kit extensions: 'refine' (commands: speckit.refine.diff, speckit.refine.propagate, speckit.refine.status, speckit.refine.update) and 'agent-context' (speckit.agent-context.update). Covers extension.yml manifests, command definitions, and scripts.",
+      "parent": "Spec-Kit Extensions and Claude Skills",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Claude Skills and AI Automation",
+      "purpose": "Documents the Claude AI skills in .claude/skills/: the SDD lifecycle skills (speckit-specify, speckit-clarify, speckit-plan, speckit-tasks, speckit-analyze, speckit-implement, speckit-converge, speckit-constitution, speckit-checklist, speckit-taskstoissues), the refine skills (diff, propagate, status, update), and the sync-with-speckit skill for upstream gap analysis.",
+      "parent": "Spec-Kit Extensions and Claude Skills",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Feature Specifications",
+      "purpose": "Overview of the specs/ directory and the Spec-Driven Development artifacts used to build spectatui itself. Links to child pages for each feature spec.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Spec 001: Dashboard MVP",
+      "purpose": "Documents the first feature specification (specs/001-spectatui-dashboard-mvp/): the functional requirements, data model, CLI args contract, config schema contract, specify CLI actions contract, quickstart guide, research notes, and implementation tasks.",
+      "parent": "Feature Specifications",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Spec 002: Catalog Manager",
+      "purpose": "Documents the second feature specification (specs/002-catalog-manager/): the catalog manager requirements, data model, CLI catalog commands contract, quickstart, research, and implementation tasks.",
+      "parent": "Feature Specifications",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Glossary",
+      "purpose": "Definitions of all codebase-specific terms, abbreviations, and domain concepts that an onboarding engineer needs to know, with code pointers.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    }
+  ]
+}
